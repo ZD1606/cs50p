@@ -187,10 +187,11 @@ def change_list_withdraw(name_lst):   # отнимает количество п
 
     market_price_one_coin=market_price(name)# узнаю рыночную стоимость что б добавить ее в список 
     #редактирую список со словарями в отнимании
-    print(name_lst)
+
     for i in name_lst:
         if i['name']==name:
-           while True:
+            print 
+            while True:
                 amount=float(input("Enter amount coin: "))
                 if float(i['amount'])-float(amount)>=0:
                     i['amount']=float(i['amount'])-float(amount)
@@ -198,28 +199,29 @@ def change_list_withdraw(name_lst):   # отнимает количество п
                 else :
                     print('Invalid Amount')
                     pass
-           if i['average'] !=None:
-            i['spent']=float('{:.5f}'.format(float(i['spent'])-float(i['average'])*float(amount)))
-           else:
-               while True:
-                try:
-                    average=float(input("Enter average price: "))
-                    break
-                except:
-                    print('Invalid format')
-                    pass
+            if i['average'] !=None:
+                i['spent']=float('{:.5f}'.format(float(i['spent'])-float(i['average'])*float(amount)))
+            else:
+                while True:
+                 try:
+                     average=float(input("Enter average price: "))
+                     break
+                 except:
+                     print('Invalid format')
+                     pass
                 
-               i['average']=average
-               i['spent']=float('{:.5f}'.format(float(i['spent'])-float(i['average'])*float(amount)))
-               i['market_price']= market_price_one_coin
-           if market_price_one_coin =='Not information on ByBit':
+                i['average']=average
+                i['spent']=float('{:.5f}'.format(float(i['spent'])-float(i['average'])*float(amount)))
+                i['market_price']= market_price_one_coin
+            if market_price_one_coin =='Not information on ByBit':
                 i['market_all']=0
-           else:
-               i['market_all']=float(i['amount'])* float(market_price_one_coin)
-           return name_lst
-        
-    return sys.exit('Not have coin in list')
-
+            else:
+                i['market_all']=float(i['amount'])* float(market_price_one_coin)
+            return name_lst
+        else:
+            print('Not have coin in list')
+            return name_lst
+    
 
 
 def save_new_file(name_file,name_new_list):

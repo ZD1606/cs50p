@@ -1,7 +1,7 @@
-greetings=input("greetings: ")
-if greetings.startswith('hello'):
-    print('0$')
-elif greetings.startswith('h'):
-    print('20$') 
+greetings=input("greetings: ").lower().strip()
+if greetings.startswith('hello')== True:
+    print('$0')
+elif greetings.startswith('h')==True:
+    print('$20') 
 else:
-    print("100$")
+    print("$100")
