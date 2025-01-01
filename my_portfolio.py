@@ -171,7 +171,15 @@ def change_list_deposit(name_lst):  #проверяю ввод двнніх ко
            return name_lst
     name_lst.insert(-1,{'name':name,'amount':float(amount),'spent':float(spent),'average':float('{:.5f}'.format(float(spent)/float(amount))),'market_price':market_price_one_coin,
                      'market_all':market_all,'result':None,'new_result':None})
+    have_total=False
+    for i in name_lst:
+        if i['name']=='Total':
+            have_total=True
+    if have_total==False:
+        name_lst.append({'name':'Total','amount':None,'spent':float(spent),'average':None,'market_price':None,
+                     'market_all':market_all,'result':None,'new_result':None})
     return name_lst
+
 
 
 def change_list_withdraw(name_lst):   # отнимает количество по средней цене  
@@ -262,7 +270,7 @@ def new_information_report(name_list): # возвращает новую инф�
             i['market_all']= 0
         else:
             i['market_all']=float('{:.4f}'.format(float(i['market_price'])*float(i['amount'])))
-        if i["result"]=='':
+        if i["result"]=='' or i["result"]== 0:
             i["new_result"]=0
         else:
             i["new_result"]=float('{:.2f}'.format(float(float('{:.3f}'.format((i["market_all"])-float(i["spent"])))/float('{:.3f}'.format(float(i["result"])))-1)*100))
@@ -391,6 +399,7 @@ def print_report(name_file):
 
     
     pdf.output(name_output)
+
 
 def del_coin(name_lst):
     while True:
